@@ -1,4 +1,4 @@
-const CACHE_NAME = "pointread-english-v4";
+const CACHE_NAME = "pointread-english-v5";
 const APP_ASSETS = [
   "./",
   "./index.html",
