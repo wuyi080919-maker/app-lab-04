@@ -1,0 +1,19 @@
+{
+  "name": "PointRead English",
+  "short_name": "PointRead",
+  "description": "粘贴英文，点词朗读、查词、收藏的护眼阅读 App。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#e7eee6",
+  "theme_color": "#e7eee6",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
