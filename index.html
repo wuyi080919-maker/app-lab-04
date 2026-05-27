@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e7eee6" />
+    <meta name="description" content="一个可粘贴英文并点词朗读、查词、收藏的护眼阅读 App。" />
+    <title>PointRead English</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="composer-view active" id="composer-view" aria-labelledby="composer-title">
+        <div class="phone-shell">
+          <header class="cover-hero">
+            <div class="hero-shade"></div>
+            <div class="status-row" aria-hidden="true"><span>11:37</span><span>●●● 57%</span></div>
+            <div class="hero-copy">
+              <p class="eyebrow">PointRead English</p>
+              <h1 id="composer-title">每天 10 分钟，读懂真正喜欢的英文</h1>
+            </div>
+          </header>
+
+          <section class="input-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Paste Text</p>
+                <h2>粘贴你的英文</h2>
+              </div>
+              <button class="text-button" id="sample-btn" type="button">示例</button>
+            </div>
+            <textarea id="source-text" spellcheck="false" placeholder="Paste English text here..."></textarea>
+            <div class="input-actions">
+              <div class="counter"><span id="word-count">0</span> words</div>
+              <button class="primary-button" id="start-reading" type="button">开始阅读</button>
+            </div>
+          </section>
+
+          <aside class="setup-panel" aria-label="阅读设置">
+            <div class="mini-stats">
+              <div><strong id="saved-count">0</strong><span>收藏词</span></div>
+              <div><strong id="read-count">0</strong><span>已点读</span></div>
+            </div>
+            <div class="reader-settings">
+              <label class="control-row">
+                <span>字号</span>
+                <input id="font-size" type="range" min="18" max="34" value="25" />
+              </label>
+              <label class="control-row">
+                <span>行距</span>
+                <input id="line-height" type="range" min="140" max="210" value="174" />
+              </label>
+              <label class="toggle-row">
+                <input id="auto-speak" type="checkbox" checked />
+                <span>点词朗读</span>
+              </label>
+              <label class="toggle-row">
+                <input id="dim-read" type="checkbox" checked />
+                <span>读过变淡</span>
+              </label>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="reader-view" id="reader-view" aria-labelledby="reader-title">
+        <div class="phone-shell reader-phone">
+          <header class="reader-hero">
+            <div class="hero-shade"></div>
+            <div class="status-row" aria-hidden="true"><span>11:37</span><span>●●● 57%</span></div>
+            <div class="reader-toolbar">
+              <button class="icon-button" id="back-btn" aria-label="返回输入" title="返回输入">‹</button>
+              <div class="toolbar-actions">
+                <button class="icon-button" id="speak-page" aria-label="朗读全文" title="朗读全文">▶</button>
+                <button class="icon-button" id="toggle-translation" aria-label="查看全文翻译" title="查看全文翻译">译</button>
+                <button class="icon-button" id="pause-speech" aria-label="暂停朗读" title="暂停朗读">Ⅱ</button>
+                <button class="icon-button" id="open-notes" aria-label="打开收藏" title="打开收藏">☆</button>
+                <button class="icon-button" id="theme-toggle" aria-label="切换深浅色" title="切换深浅色">◐</button>
+              </div>
+            </div>
+            <div class="reader-title">
+              <p class="eyebrow">Reading Mode</p>
+              <h1 id="reader-title">点单词，听发音，看释义</h1>
+            </div>
+          </header>
+
+          <article class="reader-card">
+            <div class="progress-wrap" aria-hidden="true"><span id="progress-bar"></span></div>
+            <div class="reading-surface" id="reading-surface"></div>
+            <section class="translation-panel" id="translation-panel" aria-live="polite">
+              <div class="translation-head">
+                <div>
+                  <p class="eyebrow">Full Translation</p>
+                  <h2>全文翻译</h2>
+                </div>
+                <button class="text-button" id="refresh-translation" type="button">重新翻译</button>
+              </div>
+              <div class="translation-output" id="translation-output">点击“译”后生成中文全文翻译。</div>
+              <form class="translation-edit" id="translation-edit-form">
+                <textarea id="translation-edit-input" placeholder="你可以在这里修正译文，保存后下次优先显示你的版本。"></textarea>
+                <button class="primary-button" type="submit">保存译文</button>
+              </form>
+            </section>
+          </article>
+        </div>
+
+        <div class="lookup-popover" id="lookup-popover" role="dialog" aria-live="polite">
+          <div class="bubble-tail" aria-hidden="true"></div>
+          <div class="lookup-top">
+            <div>
+              <strong id="lookup-word"></strong>
+              <span id="lookup-phonetic"></span>
+            </div>
+            <button class="icon-button small" id="close-popover" aria-label="关闭" title="关闭">×</button>
+          </div>
+          <p id="lookup-meaning"></p>
+          <form class="custom-meaning" id="custom-meaning-form">
+            <input id="custom-meaning-input" type="text" placeholder="补充中文释义，保存后下次自动显示" autocomplete="off" />
+            <button type="submit">保存释义</button>
+          </form>
+          <div class="lookup-actions">
+            <button id="speak-word" type="button">朗读</button>
+            <button id="save-word" type="button">收藏</button>
+            <button id="mark-known" type="button">已掌握</button>
+          </div>
+        </div>
+
+        <aside class="notes-drawer" id="notes-drawer" aria-label="收藏词">
+          <div class="drawer-head">
+            <h2>收藏词</h2>
+            <button class="icon-button small" id="close-notes" aria-label="关闭收藏" title="关闭">×</button>
+          </div>
+          <div class="notes-list" id="notes-list"></div>
+        </aside>
+
+        <nav class="bottom-nav" aria-label="底部导航">
+          <button class="active" type="button">⌂<span>阅读</span></button>
+          <button id="nav-speak" type="button">▶<span>朗读</span></button>
+          <button id="nav-translation" type="button">译<span>译文</span></button>
+          <button id="nav-notes" type="button">☆<span>收藏</span></button>
+        </nav>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
