@@ -104,17 +104,6 @@ button {
     repeating-linear-gradient(0deg, rgba(25, 23, 21, 0.018), rgba(25, 23, 21, 0.018) 1px, transparent 1px, transparent 18px);
 }
 
-.status-row {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 24px 0;
-  font-weight: 800;
-  color: rgba(25, 23, 21, 0.68);
-}
-
 .hero-copy,
 .reader-title {
   position: absolute;
